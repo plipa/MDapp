@@ -11,10 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
-/**
- *
- * @author wro00571
- */
 public interface DButils {
     
     ResultSet executeQuery(String query) throws SQLException;
