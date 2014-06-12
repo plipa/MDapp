@@ -6,6 +6,7 @@
 
 package mdapp;
 
+import Mock.DoctorsCard;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
@@ -23,10 +24,12 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Main extends javax.swing.JFrame {
 
+    DoctorsCard doc_card;
     /**
      * Creates new form Main
      */
     public Main() {
+        doc_card=new DoctorsCard();
         initComponents();
         //jTable1.setVisible(false);
         jScrollPane1.setVisible(false);
@@ -99,7 +102,7 @@ public class Main extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Name of drug", "Amount", "Dosage"
+                "id", "Name of drug", "Amount", "Dosage"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -155,7 +158,7 @@ public class Main extends javax.swing.JFrame {
                                 .addGroup(CreatePresPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addContainerGap(12, Short.MAX_VALUE))))
+                        .addContainerGap(20, Short.MAX_VALUE))))
         );
         CreatePresPanelLayout.setVerticalGroup(
             CreatePresPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
