@@ -13,10 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Vector;
 
-/**
- *
- * @author wro00571
- */
+
 public class DBUtils_imp implements DButils{
 Connection conn=null;
     
@@ -35,8 +32,10 @@ Connection conn=null;
     }
 
     @Override
-    public byte[] getNounce(int doctors_id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public byte[] getNounce(int doctors_id) throws SQLException {
+        ResultSet s = executeQuery("select get_doctor_nonce()");
+        byte[] nounce = s.getBytes(0);
+        return nounce;
     }
 
     @Override
