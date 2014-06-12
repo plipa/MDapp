@@ -18,11 +18,11 @@ import java.util.Vector;
 public interface DButils {
     
     ResultSet executeQuery(String query) throws SQLException;
-    byte[]    getNounce(int doctors_id);
-    Vector<Vector<String>>  browseMedicine          (String name, String type);
-    Vector<Vector<String>>  browseDoctors           (String name, String address, int license_number);
-    void                    createPrescription      (int doctor_id, int patient_id, int drug_id,int dosage, int unit, int quantity, byte[] signature);
-    Vector<Vector<String>>  browseHistory           (int doctor_id, int patient_id, String start, String end, boolean bought, byte[] doctors_sign, byte[] patient_sign);
+    byte[]    getNounce(int doctors_id)throws SQLException;
+    Vector<Vector<String>>  browseMedicine          (String name, String type)throws SQLException;
+    Vector<Vector<String>>  browseDoctors           (String name, String address, int license_number)throws SQLException;
+    void                    createPrescription      (int doctor_id, int patient_id, int drug_id,int dosage, int unit, int quantity, byte[] signature)throws SQLException;
+    Vector<Vector<String>>  browseHistory           (int doctor_id, int patient_id, String start, String end, boolean bought, byte[] doctors_sign, byte[] patient_sign)throws SQLException;
     Vector<Vector<String>>  convertResultSetToVector(ResultSet set); 
     
 }
