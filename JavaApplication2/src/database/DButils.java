@@ -8,6 +8,7 @@ package database;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Vector;
 
 /**
@@ -16,7 +17,7 @@ import java.util.Vector;
  */
 public interface DButils {
     
-    ResultSet executeQuery(String query);
+    ResultSet executeQuery(String query) throws SQLException;
     byte[]    getNounce(int doctors_id);
     Vector<Vector<String>>  browseMedicine          (String name, String type);
     Vector<Vector<String>>  browseDoctors           (String name, String address, int license_number);
