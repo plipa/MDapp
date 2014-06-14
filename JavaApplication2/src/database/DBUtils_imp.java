@@ -75,8 +75,12 @@ Connection conn=null;
 
     @Override
     public Vector<Vector<String>> browseHistory(int doctor_id, int patient_id, String start, String end, boolean bought, byte[] doctors_sign, byte[] patient_sign) throws SQLException {
-        ResultSet s = executeQuery("select browse_patient_prescription_history("+doctor_id+","+patient_id+","+start+","+end+","+String.valueOf(bought)+","+doctors_sign+","+patient_sign+");");
-        return convertResultSetToVector(s);
+//        String query = "select browse_patient_prescription_history2("+doctor_id+","+patient_id+","+start+","+end+","+String.valueOf(bought)+","+doctors_sign+","+patient_sign+");";
+        String query = "select browse_patient_prescription_history2("+doctor_id+","+patient_id+","+start+","+end+","+String.valueOf(bought)+",null,null);";
+//        System.out.println(query);
+        ResultSet s = executeQuery(query);
+        
+        return convertStringResultSetToVectorforBrowser(s);
     }
 
     @Override
@@ -95,4 +99,26 @@ Connection conn=null;
         return ret;
     }
     
+    
+    public Vector<Vector<String>> convertStringResultSetToVectorforBrowser(ResultSet set) throws SQLException {
+        ResultSetMetaData rsmd = set.getMetaData();
+
+        int columnsNumber = rsmd.getColumnCount();
+        Vector ret = new Vector();
+        while(set.next()){
+            Vector<String> a = new Vector<String>();
+            String temp = set.getString(1);
+            String[] tab = temp.split(",");
+            
+            for (int i=0;i<tab.length;i++) {
+                if (i==0||i==1||i==2||i==3||i==4||i==6||i==7||i==9||i==10) {
+                    a.add(tab[i].replace("(", "").replace("\"", ""));
+                }
+                
+                
+            }
+            ret.add(a);
+        }
+        return ret;
+    }
 }

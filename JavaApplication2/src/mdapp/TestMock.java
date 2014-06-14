@@ -98,4 +98,13 @@ public class TestMock {
         return model;
     }
     
+    static void printf(Vector<Vector<String>> vec){
+        for (Vector<String> vector : vec) {
+            for (String string : vector) {
+                System.out.print(string+ " ");
+            }
+            System.out.println();
+        }
+    }
+    
 }

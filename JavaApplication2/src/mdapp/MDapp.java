@@ -13,6 +13,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -30,8 +31,10 @@ public class MDapp {
       
         try {
             DButils test = new DBUtils_imp();
-            String nounce =  test.getStringNounce(5);
-            System.out.println(nounce);
+//            String nounce =  test.getStringNounce(5);
+//            System.out.println(nounce);
+              Vector<Vector<String>> a = test.browseHistory(5, 1, null, null, false, null, null);
+              TestMock.printf(a);
             
         } catch (SQLException ex) {
             Logger.getLogger(MDapp.class.getName()).log(Level.SEVERE, null, ex);

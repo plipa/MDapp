@@ -6,10 +6,16 @@
 
 package mdapp;
 
+import database.DBUtils_imp;
+import database.DButils;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.Rectangle;
+import java.sql.SQLException;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -182,7 +188,15 @@ Object main;
             ((Main)main).setSelectedUser((String)jTable1.getValueAt(row, 0).toString(), (String)jTable1.getValueAt(row, 1).toString(), (String)jTable1.getValueAt(row, 2).toString(), (String)jTable1.getValueAt(row, 3).toString());
         }
         if(main instanceof HistoryBrowserPanel){
-            ((HistoryBrowserPanel)main).setSelectedUser((String)jTable1.getValueAt(row, 0).toString(), (String)jTable1.getValueAt(row, 1).toString(), (String)jTable1.getValueAt(row, 2).toString(), (String)jTable1.getValueAt(row, 3).toString());
+           (( HistoryBrowserPanel)main).setSelectedUser((String)jTable1.getValueAt(row, 0).toString(), (String)jTable1.getValueAt(row, 1).toString(), (String)jTable1.getValueAt(row, 2).toString(), (String)jTable1.getValueAt(row, 3).toString());
+           try {
+               DButils test = new DBUtils_imp();
+               Vector<Vector<String>> a = test.browseHistory(5, 1, null, null, false, null, null);
+               TestMock.convertVectorToModelTable(a, ((HistoryBrowserPanel)main).jTable1);
+           } catch (SQLException ex) {
+               Logger.getLogger(ListPatient.class.getName()).log(Level.SEVERE, null, ex);
+           }
+            
         }
         setVisible(false);
         
