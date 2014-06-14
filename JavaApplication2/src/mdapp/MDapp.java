@@ -6,6 +6,8 @@
 
 package mdapp;
 
+import database.DBUtils_imp;
+import database.DButils;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -26,6 +28,14 @@ public class MDapp {
     static Connection conn=null;
     public static void main(String[] args) {
       
+        try {
+            DButils test = new DBUtils_imp();
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(MDapp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         Main m = new Main();
         m.setVisible(true);
         
