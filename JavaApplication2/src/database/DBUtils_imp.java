@@ -20,7 +20,7 @@ Connection conn=null;
     
     
     public DBUtils_imp() throws SQLException {
-        String url = "jdbc:postgresql://www.kubaplas.pl/project?user=doctor1&password=doctor";
+        String url = "jdbc:postgresql://192.168.6.105/test?user=postgres&password=p1lipa";
         conn = DriverManager.getConnection(url);
     }
 
@@ -57,8 +57,9 @@ Connection conn=null;
     }
 
     @Override
-    public Vector<Vector<String>> browseHistory(int doctor_id, int patient_id, String start, String end, boolean bought, byte[] doctors_sign, byte[] patient_sign) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Vector<Vector<String>> browseHistory(int doctor_id, int patient_id, String start, String end, boolean bought, byte[] doctors_sign, byte[] patient_sign) throws SQLException {
+        ResultSet s = executeQuery("select browse_patient_prescription_history("+doctor_id+","+patient_id+","+start+","+end+","+String.valueOf(bought)+","+doctors_sign+","+patient_sign+");");
+        return convertResultSetToVector(s);
     }
 
     @Override
