@@ -12,6 +12,7 @@ import java.awt.Font;
 import java.awt.Rectangle;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
@@ -21,11 +22,11 @@ import javax.swing.table.TableCellRenderer;
  * @author piotr
  */
 public class ListPatient extends javax.swing.JFrame {
-Main main;
+Object main;
     /**
      * Creates new form ListPatient
      */
-    public ListPatient(Main main) {
+    public ListPatient(Object main) {
         this.main = main;
         initComponents();
     }
@@ -177,11 +178,15 @@ Main main;
         System.out.println(", Name: "+(String)jTable1.getValueAt(row, 1).toString());
         System.out.println(", Surname: "+(String)jTable1.getValueAt(row, 2).toString());
         System.out.println(", PESEL: "+(String)jTable1.getValueAt(row, 3).toString());
-        main.setSelectedUser((String)jTable1.getValueAt(row, 0).toString(), (String)jTable1.getValueAt(row, 1).toString(), (String)jTable1.getValueAt(row, 2).toString(), (String)jTable1.getValueAt(row, 3).toString());
+        if(main instanceof Main){
+            ((Main)main).setSelectedUser((String)jTable1.getValueAt(row, 0).toString(), (String)jTable1.getValueAt(row, 1).toString(), (String)jTable1.getValueAt(row, 2).toString(), (String)jTable1.getValueAt(row, 3).toString());
+        }
+        if(main instanceof HistoryBrowserPanel){
+            ((HistoryBrowserPanel)main).setSelectedUser((String)jTable1.getValueAt(row, 0).toString(), (String)jTable1.getValueAt(row, 1).toString(), (String)jTable1.getValueAt(row, 2).toString(), (String)jTable1.getValueAt(row, 3).toString());
+        }
         setVisible(false);
-        main.jScrollPane1.setVisible(true);
-        main.jButton3.setVisible(true);
-        main.jButton4.setVisible(true);
+        
+        
         TestMock.saveTableToFile(jTable1,"patients.txt");
     }//GEN-LAST:event_jButton1ActionPerformed
 

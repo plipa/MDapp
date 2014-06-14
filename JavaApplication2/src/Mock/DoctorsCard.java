@@ -22,7 +22,7 @@ public class DoctorsCard {
     }
 
     public DoctorsCard() {
-        crypto = new Crypto();
+        crypto = new Crypto(true);
         Random r = new Random();
         doctors_id = r.nextInt();
 

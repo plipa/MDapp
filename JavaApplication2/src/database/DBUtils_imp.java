@@ -34,8 +34,25 @@ Connection conn=null;
 
     @Override
     public byte[] getNounce(int doctors_id) throws SQLException {
+        String nounce = null;
         ResultSet s = executeQuery("select get_doctor_nonce("+Integer.toString(doctors_id)+")");
-        byte[] nounce = s.getBytes(0);
+        if(s.next()){
+        nounce = s.getString(1);
+            //System.out.println(s.getString(1));
+        }
+        
+        return nounce.getBytes();
+    }
+    
+    @Override
+    public String getStringNounce(int doctors_id) throws SQLException {
+        String nounce = null;
+        ResultSet s = executeQuery("select get_doctor_nonce("+Integer.toString(doctors_id)+")");
+        if(s.next()){
+        nounce = s.getString(1);
+            //System.out.println(s.getString(1));
+        }
+        
         return nounce;
     }
 

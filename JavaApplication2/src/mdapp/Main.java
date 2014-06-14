@@ -25,6 +25,7 @@ import javax.swing.table.DefaultTableModel;
 public class Main extends javax.swing.JFrame {
 
     DoctorsCard doc_card;
+    HistoryBrowserPanel hbp;
     /**
      * Creates new form Main
      */
@@ -249,10 +250,49 @@ public class Main extends javax.swing.JFrame {
        ListPatient listp = new ListPatient(this);
        TestMock.setTestTableListPatient(listp.jTable1,"patients.txt");
        listp.setVisible(true);
+       if(hbp!=null){
+        hbp.setVisible(false);
+        CreatePresPanel.setVisible(true);
+       }
+       
+       jScrollPane1.setVisible(true);
+       jButton3.setVisible(true);
+       jButton4.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        // TODO add your handling code here:
+        
+        CreatePresPanel.setVisible(false);
+        
+        
+        
+        if(hbp==null){
+        hbp = new HistoryBrowserPanel();
+        
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(hbp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(hbp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        }
+        else{
+            hbp.setVisible(true);
+        }
+       ListPatient listp = new ListPatient(hbp);
+       TestMock.setTestTableListPatient(listp.jTable1,"patients.txt");
+       listp.setVisible(true);
+        
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked

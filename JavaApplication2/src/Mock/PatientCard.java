@@ -16,7 +16,7 @@ public class PatientCard {
     Crypto crypto;
 
     public PatientCard() {
-        crypto = new Crypto();
+        crypto = new Crypto(true);
         
     }
     public byte[] sign(byte[] msg) throws InvalidKeyException, SignatureException{

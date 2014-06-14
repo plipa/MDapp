@@ -30,7 +30,8 @@ public class MDapp {
       
         try {
             DButils test = new DBUtils_imp();
-            
+            String nounce =  test.getStringNounce(5);
+            System.out.println(nounce);
             
         } catch (SQLException ex) {
             Logger.getLogger(MDapp.class.getName()).log(Level.SEVERE, null, ex);

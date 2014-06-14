@@ -38,37 +38,62 @@ public class Crypto {
     private PrivateKey sk;
     private PublicKey pk;
 
-    public Crypto(String sk, String pk) throws NoSuchProviderException, InvalidKeySpecException {
-        try {
-            KeyFactory fact = KeyFactory.getInstance("ECDSA", bc);
-            this.sk = fact.generatePrivate(new PKCS8EncodedKeySpec(Hex.stringHexToByteHex(sk)));
-            this.pk = fact.generatePublic(new X509EncodedKeySpec(Hex.stringHexToByteHex(pk)));
-
+    public Crypto(String sk, String pk, boolean isRSA) throws NoSuchProviderException, InvalidKeySpecException {
+        if(isRSA){
             bc = new BouncyCastleProvider();
-            signature = Signature.getInstance("SHA256WithECDSA", bc);
-        } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(Crypto.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                signature = Signature.getInstance("SHA1WithRSA",bc);
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(Crypto.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }else
+        {
+            try {
+                KeyFactory fact = KeyFactory.getInstance("ECDSA", bc);
+                this.sk = fact.generatePrivate(new PKCS8EncodedKeySpec(Hex.stringHexToByteHex(sk)));
+                this.pk = fact.generatePublic(new X509EncodedKeySpec(Hex.stringHexToByteHex(pk)));
+
+                bc = new BouncyCastleProvider();
+                signature = Signature.getInstance("SHA256WithECDSA", bc);
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(Crypto.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
-    public Crypto() {
-        try {
-
+    public Crypto(boolean isRSA) {
+        if(isRSA){
             bc = new BouncyCastleProvider();
-            signature = Signature.getInstance("SHA256WithECDSA", bc);
             try {
-                genKeys();
-            } catch (InvalidKeySpecException ex) {
+                signature = Signature.getInstance("SHA1WithRSA",bc);
+                genKeysRSA();
+            } catch (NoSuchAlgorithmException ex) {
                 Logger.getLogger(Crypto.class.getName()).log(Level.SEVERE, null, ex);
             } catch (NoSuchProviderException ex) {
                 Logger.getLogger(Crypto.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (InvalidAlgorithmParameterException ex) {
+            }
+            
+        }else
+        {
+            try {
+
+                bc = new BouncyCastleProvider();
+                signature = Signature.getInstance("SHA256WithECDSA", bc);
+                try {
+                    genKeys();
+                } catch (InvalidKeySpecException ex) {
+                    Logger.getLogger(Crypto.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (NoSuchProviderException ex) {
+                    Logger.getLogger(Crypto.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InvalidAlgorithmParameterException ex) {
+                    Logger.getLogger(Crypto.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            } catch (NoSuchAlgorithmException ex) {
                 Logger.getLogger(Crypto.class.getName()).log(Level.SEVERE, null, ex);
             }
-
-        } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(Crypto.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       }
 
     }
 
@@ -92,6 +117,15 @@ public class Crypto {
         KeyPair pair = g.generateKeyPair();
         pk = pair.getPublic();
         sk = pair.getPrivate();
+    }
+    
+    public void genKeysRSA() throws NoSuchAlgorithmException, NoSuchProviderException{
+         KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA", "BC");
+         keyGen.initialize(2048, new SecureRandom());
+
+         KeyPair keyPair = keyGen.generateKeyPair();
+         pk = keyPair.getPublic();
+         sk = keyPair.getPrivate();
     }
 
     public byte[] sendPK() {

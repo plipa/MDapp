@@ -15,6 +15,7 @@ public interface DButils {
     
     ResultSet executeQuery(String query) throws SQLException;
     byte[]    getNounce(int doctors_id)throws SQLException;
+    String getStringNounce(int doctors_id) throws SQLException;
     Vector<Vector<String>>  browseMedicine          (String name, String type)throws SQLException;
     Vector<Vector<String>>  browseDoctors           (String name, String address, int license_number)throws SQLException;
     void                    createPrescription      (int doctor_id, int patient_id, int drug_id,int dosage, int unit, int quantity, byte[] signature)throws SQLException;
