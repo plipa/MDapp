@@ -120,7 +120,7 @@ public class Crypto {
     }
     
     public void genKeysRSA() throws NoSuchAlgorithmException, NoSuchProviderException{
-         KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA", "BC");
+         KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA", bc);
          keyGen.initialize(2048, new SecureRandom());
 
          KeyPair keyPair = keyGen.generateKeyPair();

@@ -190,8 +190,10 @@ Object main;
         if(main instanceof HistoryBrowserPanel){
            (( HistoryBrowserPanel)main).setSelectedUser((String)jTable1.getValueAt(row, 0).toString(), (String)jTable1.getValueAt(row, 1).toString(), (String)jTable1.getValueAt(row, 2).toString(), (String)jTable1.getValueAt(row, 3).toString());
            try {
+               ((HistoryBrowserPanel)main).jTable1.removeAll();
                DButils test = new DBUtils_imp();
-               Vector<Vector<String>> a = test.browseHistory(5, 1, null, null, false, null, null);
+               Vector<Vector<String>> a = test.browseHistory(5, Integer.parseInt((String)jTable1.getValueAt(row, 0)), null, null, false, null, null);
+//               TestMock.printf(a);
                TestMock.convertVectorToModelTable(a, ((HistoryBrowserPanel)main).jTable1);
            } catch (SQLException ex) {
                Logger.getLogger(ListPatient.class.getName()).log(Level.SEVERE, null, ex);

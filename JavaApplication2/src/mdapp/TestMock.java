@@ -92,6 +92,8 @@ public class TestMock {
     
     static DefaultTableModel convertVectorToModelTable(Vector<Vector<String>> vec, javax.swing.JTable tab){
         DefaultTableModel model = (DefaultTableModel) tab.getModel();
+        model.setRowCount(0);
+        
         for (Vector<String> vector : vec) {
             model.addRow(vector);
         }

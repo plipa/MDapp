@@ -29,17 +29,7 @@ public class MDapp {
     static Connection conn=null;
     public static void main(String[] args) {
       
-        try {
-            DButils test = new DBUtils_imp();
-//            String nounce =  test.getStringNounce(5);
-//            System.out.println(nounce);
-              Vector<Vector<String>> a = test.browseHistory(5, 1, null, null, false, null, null);
-              TestMock.printf(a);
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(MDapp.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+                
         Main m = new Main();
         m.setVisible(true);
         
