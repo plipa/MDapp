@@ -17,6 +17,7 @@ import java.sql.Statement;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -341,6 +342,7 @@ public class Main extends javax.swing.JFrame {
 //            }
 
             }
+           JOptionPane.showMessageDialog(null, "Prescriptions successfuly inserted to the database.", "Done!", JOptionPane.INFORMATION_MESSAGE);  
         } catch (SQLException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
