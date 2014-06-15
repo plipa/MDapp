@@ -20,7 +20,7 @@ Connection conn=null;
     
     
     public DBUtils_imp() throws SQLException {
-        String url = "jdbc:postgresql://192.168.6.105/test?user=postgres&password=p1lipa";
+        String url = "jdbc:postgresql://192.168.1.24/test?user=postgres&password=p1lipa";
         conn = DriverManager.getConnection(url);
     }
 
@@ -70,7 +70,7 @@ Connection conn=null;
 
     @Override
     public void createPrescription(int doctor_id, int patient_id, int drug_id, int dosage, int unit, int quantity, byte[] signature) throws SQLException {
-        ResultSet s = executeQuery("select create_prescription("+doctor_id+","+drug_id+","+dosage+","+unit+","+quantity+","+signature+")"); 
+        ResultSet s = executeQuery("select create_prescription("+doctor_id+","+patient_id+","+drug_id+","+dosage+","+unit+","+quantity+",'aa'::bytea)"); 
     }
 
     @Override

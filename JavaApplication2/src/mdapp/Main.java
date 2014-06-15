@@ -7,6 +7,8 @@
 package mdapp;
 
 import Mock.DoctorsCard;
+import database.DBUtils_imp;
+import database.DButils;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
@@ -89,7 +91,7 @@ public class Main extends javax.swing.JFrame {
 
         jLabel8.setText("PESEL:");
 
-        jButton1.setText("Confirm");
+        jButton1.setText("Send prescription to the database");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -306,33 +308,43 @@ public class Main extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        StringBuilder s = new StringBuilder();
-        Statement statement=null;
-        
-        
+//        StringBuilder s = new StringBuilder();
+//        Statement statement=null;
+//        
+//        
+//        try {
+//            statement = MDapp.conn.createStatement();
+//            ResultSet rs = statement.executeQuery("SELECT get_nounce()");
+//            String nounce = rs.getString(0);
+//            
+//            //nounce + prescription singing? FIX TODO
+//        } catch (SQLException ex) {
+//            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        Vector<Vector<String>> vector = TestMock.convertTableToVector(jTable1);
         try {
-            statement = MDapp.conn.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT get_nounce()");
-            String nounce = rs.getString(0);
+            DButils test = new DBUtils_imp();
             
-            //nounce + prescription singing? FIX TODO
+            int patient_id = Integer.parseInt(jLabel1.getText());
+            for (Vector<String> v : vector) {
+                test.createPrescription(5, patient_id , Integer.parseInt(v.get(0)), Integer.parseInt(v.get(3)),1, Integer.parseInt(v.get(2)), null);
+                
+//            s = new StringBuilder();
+//            for(String vv : v){
+//                s=s.append(vv).append(",");
+//            }
+//            try {
+//                statement.executeQuery("DUPA DUPA DUPA"+s); //query with prescription for 1 drug FIX TODO
+//                //as string send it to db
+//            } catch (SQLException ex) {
+//                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+
+            }
         } catch (SQLException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Vector<Vector<String>> vector = TestMock.convertTableToVector(jTable1);
-        for(Vector<String> v : vector){
-            s = new StringBuilder();
-            for(String vv : v){
-                s=s.append(vv).append(",");
-            }
-            try {
-                statement.executeQuery("DUPA DUPA DUPA"+s); //query with prescription for 1 drug FIX TODO
-                //as string send it to db
-            } catch (SQLException ex) {
-                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-        }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

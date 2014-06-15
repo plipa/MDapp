@@ -183,9 +183,10 @@ int col2;
        int row = jTable1.getSelectedRow();
         
         TestMock.saveTableToFile(jTable1,"drugs.txt");
-        main.jTable1.setValueAt(jTable1.getValueAt(row, 1), row2, 0);
+        main.jTable1.setValueAt(jTable1.getValueAt(row, 1), row2, 1);
+        main.jTable1.setValueAt(String.valueOf(row2+1), row2, 0);
         DefaultTableModel model = (DefaultTableModel) main.jTable1.getModel();
-        model.addRow(new Object[]{"", "",""});
+        model.addRow(new Object[]{"","", "",""});
         row2++;
     }//GEN-LAST:event_jButton1ActionPerformed
 
